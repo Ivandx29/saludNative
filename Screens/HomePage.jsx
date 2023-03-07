@@ -8,6 +8,7 @@ import { StyleSheet } from 'react-native';
 //Screens
 import FrecuenciaCardiaca from './FrecuenciaCardiaca';
 import ColesterolGlucosa from './ColesterolGlucosa';
+import tailwind from 'tailwind-rn';
 
 const { Navigator, Screen } = createMaterialTopTabNavigator();
 
@@ -41,7 +42,7 @@ const TopTabBar = ({ navigation, state }) => {
 
 const HomeScreen = () => {
     return (
-        <Layout style={{ flex: 1, marginTop: 30 }}>
+        <Layout style={{ flex: 1, marginTop: 40 }}>
             <TopTabBar />
         </Layout>
     )

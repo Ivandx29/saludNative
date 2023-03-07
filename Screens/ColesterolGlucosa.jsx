@@ -29,7 +29,6 @@ const ColesterolGlucosa = () => {
     };
 
     const onSubmit = (data) => {
-        console.log(data)
         // Función para calcular el IMC
         let imc = (data.Peso / (data.Altura * data.Altura)).toFixed(1);
 
@@ -53,110 +52,108 @@ const ColesterolGlucosa = () => {
     }
     return (
         <SafeAreaView style={tailwind('h-full')}>
-            <ScrollView style={tailwind('h-full')}>
-                <Layout>
+            <Card style={styles.Card}>
+                <Layout style={tailwind('px-5 mt-4')} level='1'>
+                    <Text style={tailwind('my-1')} appearance='hint'>Ingrese su Glucosa: </Text>
+                    <Controller
+                        name='Glucosa'
+                        control={control}
+                        rules={{ required: true }}
+                        render={({ field, fieldState }) => (
+                            <Input
+                                isFocused={true}
+                                status={fieldState.invalid ? 'danger' : 'basic'}
+                                maxLength={3}
+                                value={field.value}
+                                onChangeText={nextValue => {
+                                    let newNumber = (nextValue.replace(/[^0-9]/g, ''));
+                                    setNumber(newNumber);
+                                    field.onChange(newNumber);
+                                }}
+                            />
+                        )} />
+                </Layout>
+                {getFormErrorMessage("Glucosa", "Glucosa es requerido")}
+                <Layout style={tailwind('px-5 mt-4')} level='1'>
+                    <Text style={tailwind('my-1')} appearance='hint'>Ingrese su Peso: </Text>
+                    <Controller
+                        name='Peso'
+                        control={control}
+                        rules={{ required: true }}
+                        render={({ field, fieldState }) => (
+                            <Input
+                                isFocused={true}
+                                status={fieldState.invalid ? 'danger' : 'basic'}
+                                maxLength={3}
+                                value={field.value}
+                                onChangeText={nextValue => {
+                                    let newNumber = (nextValue.replace(/[^0-9]/g, ''));
+                                    setNumber(newNumber);
+                                    field.onChange(newNumber);
+                                }}
+                            />
+                        )} />
+                </Layout>
+                {getFormErrorMessage("Peso", "Peso es requerido")}
+
+                <Layout style={tailwind('px-5 mt-4')} level='1'>
+                    <Text style={tailwind('my-1')} appearance='hint'>Ingrese su Altura en Metros: </Text>
+                    <Controller
+                        name='Altura'
+                        control={control}
+                        rules={{ required: true }}
+                        render={({ field, fieldState }) => (
+                            <Input
+                                isFocused={true}
+                                status={fieldState.invalid ? 'danger' : 'basic'}
+                                maxLength={4}
+                                value={field.value}
+                                onChangeText={
+                                    field.onChange
+                                }
+                            />
+                        )} />
+                </Layout>
+                {getFormErrorMessage("Altura", "Altura es requerido")}
+
+                <Layout style={tailwind('px-5 mt-4 mb-4')} level='1' >
+                    <Text style={tailwind('my-1')} appearance='hint'>Ingrese su Edad: </Text>
+                    <Controller
+                        name='Edad'
+                        control={control}
+                        rules={{ required: true }}
+                        render={({ field, fieldState }) => (
+                            <Input
+                                isFocused={true}
+                                status={fieldState.invalid ? 'danger' : 'basic'}
+                                maxLength={2}
+                                value={field.value}
+                                onChangeText={nextValue => {
+                                    let newNumber = (nextValue.replace(/[^0-9]/g, ''));
+                                    setNumber(newNumber);
+                                    field.onChange(newNumber);
+                                }}
+                            />
+                        )} />
+                </Layout>
+                {getFormErrorMessage("Edad", "Edad es requerido")}
+
+                <Layout style={tailwind('items-center justify-center flex-row px-3 py-3')}>
+                    <Button style={tailwind('m-2 rounded-full items-center justify-center')} status='warning' accessoryLeft={trashTwoOutlineIcon} onPress={clean}>Limpiar</Button>
+                    <Button style={tailwind('m-2 rounded-full items-center justify-center')} status='success' accessoryRight={checkmarkCircleOutlineIcon}
+                        onPress={handleSubmit(onSubmit)}
+                    >Diagnosto</Button>
+                </Layout>
+                {/* Modal Para mostrar que tipo de Frecuencia Cardiaca ES: */}
+                {infoNormal && <>
                     <Card style={styles.Card}>
-
-                        <Layout style={tailwind('px-5 mt-4 mb-4')} level='1'>
-                            <Text style={tailwind('my-1')} appearance='hint'>Ingrese su Glucosa: </Text>
-                            <Controller
-                                name='Glucosa'
-                                control={control}
-                                rules={{ required: true }}
-                                render={({ field, fieldState }) => (
-                                    <Input
-                                        isFocused={true}
-                                        status={fieldState.invalid ? 'danger' : 'basic'}
-                                        maxLength={10}
-                                        value={field.value}
-                                        onChangeText={nextValue => {
-                                            let newNumber = (nextValue.replace(/[^0-9]/g, ''));
-                                            setNumber(newNumber);
-                                            field.onChange(newNumber);
-                                        }}
-                                    />
-                                )} />
-                        </Layout>
-                        {getFormErrorMessage("Glucosa", "Glucosa es requerido")}
-                        <Layout style={tailwind('px-5 mt-4 mb-4')} level='1'>
-                            <Text style={tailwind('my-1')} appearance='hint'>Ingrese su Peso: </Text>
-                            <Controller
-                                name='Peso'
-                                control={control}
-                                rules={{ required: true }}
-                                render={({ field, fieldState }) => (
-                                    <Input
-                                        isFocused={true}
-                                        status={fieldState.invalid ? 'danger' : 'basic'}
-                                        maxLength={10}
-                                        value={field.value}
-                                        onChangeText={nextValue => {
-                                            let newNumber = (nextValue.replace(/[^0-9]/g, ''));
-                                            setNumber(newNumber);
-                                            field.onChange(newNumber);
-                                        }}
-                                    />
-                                )} />
-                        </Layout>
-                        {getFormErrorMessage("Peso", "Peso es requerido")}
-
-                        <Layout style={tailwind('px-5 mt-4 mb-4')} level='1'>
-                            <Text style={tailwind('my-1')} appearance='hint'>Ingrese su Altura en Metros: </Text>
-                            <Controller
-                                name='Altura'
-                                control={control}
-                                rules={{ required: true }}
-                                render={({ field, fieldState }) => (
-                                    <Input
-                                        isFocused={true}
-                                        status={fieldState.invalid ? 'danger' : 'basic'}
-                                        maxLength={10}
-                                        value={field.value}
-                                        onChangeText={
-                                            field.onChange
-                                        }
-                                    />
-                                )} />
-                        </Layout>
-                        {getFormErrorMessage("Altura", "Altura es requerido")}
-
-                        <Layout style={tailwind('px-5 mt-4 mb-4')} level='1' >
-                            <Text style={tailwind('my-1')} appearance='hint'>Ingrese su Edad: </Text>
-                            <Controller
-                                name='Edad'
-                                control={control}
-                                rules={{ required: true }}
-                                render={({ field, fieldState }) => (
-                                    <Input
-                                        isFocused={true}
-                                        status={fieldState.invalid ? 'danger' : 'basic'}
-                                        maxLength={10}
-                                        value={field.value}
-                                        onChangeText={nextValue => {
-                                            let newNumber = (nextValue.replace(/[^0-9]/g, ''));
-                                            setNumber(newNumber);
-                                            field.onChange(newNumber);
-                                        }}
-                                    />
-                                )} />
-                        </Layout>
-                        {getFormErrorMessage("Edad", "Edad es requerido")}
-                        
-                        <Layout style={tailwind('items-center justify-center flex-row px-3 py-3')}>
-                            <Button style={tailwind('m-2 rounded-full items-center justify-center')} status='primary' accessoryLeft={trashTwoOutlineIcon} onPress={clean}>Limpiar</Button>
-                            <Button style={tailwind('m-2 rounded-full items-center justify-center')} status='primary' accessoryRight={checkmarkCircleOutlineIcon}
-                                onPress={handleSubmit(onSubmit)}
-                            >Enviar</Button>
-                        </Layout>
-                        {/* Modal Para mostrar que tipo de Frecuencia Cardiaca ES: */}
-                        {infoNormal && <>
-                            <Text style={tailwind('my-1')} category='s1' appearance='hint'>{msj} </Text>
-                        </>
-
-                        }
+                        <Text style={tailwind('my-1')} category='s1'>{msj} </Text>
                     </Card >
-                </Layout >
-            </ScrollView>
+
+                </>
+
+                }
+            </Card >
         </SafeAreaView>
     )
 }

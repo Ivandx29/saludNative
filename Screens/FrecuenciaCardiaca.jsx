@@ -2,7 +2,7 @@ import React, { useState } from 'react'
 import { Divider, Select, SelectItem, Layout, Text, Button, Input, Icon, Modal, Card, NativeDateService } from '@ui-kitten/components';
 import tailwind from 'tailwind-rn';
 import { Controller, useForm } from "react-hook-form";
-import { SafeAreaView, ScrollView, StyleSheet, View, Keyboard } from 'react-native';
+import { SafeAreaView, StyleSheet } from 'react-native';
 
 
 const FrecuenciaCardiaca = () => {
@@ -30,22 +30,23 @@ const FrecuenciaCardiaca = () => {
         setInfoNormal(false);
         setMsj('');
         reset();
+        setValue('PresionArterialSistolica', '');
+        setValue('PresionArterialDiastolica', '');
     };
 
     const onSubmit = (data) => {
         let presion = parseInt(data.PresionArterialSistolica) + parseInt((2 * data.PresionArterialDiastolica))
         let presionFinal = parseInt(presion / 3)
-        console.log(presionFinal)
 
         if (presionFinal < 60) {
             setInfoNormal(true)
             setMsj('Su Presion Arterial es Baja')
         }
-        else if (presionFinal >= 60 && presionFinal < 90) {
+        else if (presionFinal >= 60 && presionFinal <= 90) {
             setInfoNormal(true)
             setMsj('Su Presion Arterial es Normal')
         }
-        else if (presionFinal >= 120 && presionFinal <= 129) {
+        else if (presionFinal >= 91 && presionFinal <= 129) {
             setInfoNormal(true)
             setMsj('Su Presion Arterial es Alta')
         }
@@ -66,68 +67,65 @@ const FrecuenciaCardiaca = () => {
 
     return (
         <SafeAreaView style={tailwind('flex-1')}>
-            <Layout style={tailwind('flex-1 flex-col')}>
-                <Layout>
-                    <Card style={styles.Card}>
-                        <Layout style={tailwind('px-5 mt-4')} level='1'>
-                            <Text style={tailwind('my-1')} category='s1' appearance='hint'>Ingrese su Presion Arterial Sistolica: </Text>
-                            <Controller
-                                name='PresionArterialSistolica'
-                                control={control}
-                                rules={{ required: true }}
-                                render={({ field, fieldState }) => (
-                                    <Input
-                                        isFocused={true}
-                                        status={fieldState.invalid ? 'danger' : 'basic'}
-                                        maxLength={3}
-                                        value={field.value}
-                                        onChangeText={nextValue => {
-                                            let newNumber = (nextValue.replace(/[^0-9]/g, ''));
-                                            setNumber(newNumber);
-                                            field.onChange(newNumber);
-                                        }}
-                                    />
-                                )} />
-                        </Layout>
-                        {getFormErrorMessage("PresionArterialSistolica", "Presion Arterial Sistolica es requerido")}
+            <Card style={tailwind('my-1 mt-8')}>
+                <Layout style={tailwind('px-5 mt-3')} level='1'>
+                    <Text style={tailwind('my-1')} category='s1' appearance='hint'>Ingrese su Presion Arterial Sistolica: </Text>
+                    <Controller
+                        name='PresionArterialSistolica'
+                        control={control}
+                        rules={{ required: true }}
+                        render={({ field, fieldState }) => (
+                            <Input
+                                isFocused={true}
+                                status={fieldState.invalid ? 'danger' : 'basic'}
+                                maxLength={3}
+                                value={field.value}
+                                onChangeText={nextValue => {
+                                    let newNumber = (nextValue.replace(/[^0-9]/g, ''));
+                                    setNumber(newNumber);
+                                    field.onChange(newNumber);
+                                }}
+                            />
+                        )} />
+                </Layout>
+                {getFormErrorMessage("PresionArterialSistolica", "Presion Arterial Sistolica es requerido")}
 
-                        <Layout style={tailwind('px-5 mt-4')} level='1'>
-                            <Text style={tailwind('my-1')} category='s1' appearance='hint'>Ingrese su Presion Arterial Diastolica: </Text>
-                            <Controller
-                                name='PresionArterialDiastolica'
-                                control={control}
-                                rules={{ required: true }}
-                                render={({ field, fieldState }) => (
-                                    <Input
-                                        isFocused={true}
-                                        status={fieldState.invalid ? 'danger' : 'basic'}
-                                        maxLength={3}
-                                        value={field.value}
-                                        onChangeText={nextValue => {
-                                            let newNumber = (nextValue.replace(/[^0-9]/g, ''));
-                                            setNumber(newNumber);
-                                            field.onChange(newNumber);
-                                        }}
-                                    />
-                                )} />
-                        </Layout>
-                        {getFormErrorMessage("PresionArterialDiastolica", "Presion Arterial Diastolica es requerido")}
+                <Layout style={tailwind('px-5 mt-3')} level='1'>
+                    <Text style={tailwind('my-1')} category='s1' appearance='hint'>Ingrese su Presion Arterial Diastolica: </Text>
+                    <Controller
+                        name='PresionArterialDiastolica'
+                        control={control}
+                        rules={{ required: true }}
+                        render={({ field, fieldState }) => (
+                            <Input
+                                isFocused={true}
+                                status={fieldState.invalid ? 'danger' : 'basic'}
+                                maxLength={3}
+                                value={field.value}
+                                onChangeText={nextValue => {
+                                    let newNumber = (nextValue.replace(/[^0-9]/g, ''));
+                                    setNumber(newNumber);
+                                    field.onChange(newNumber);
+                                }}
+                            />
+                        )} />
+                </Layout>
+                {getFormErrorMessage("PresionArterialDiastolica", "Presion Arterial Diastolica es requerido")}
 
-                        <Layout style={tailwind('items-center justify-center flex-row px-3 py-3')}>
-                            <Button style={tailwind('m-4 rounded-full items-center justify-center')} status='primary' accessoryLeft={trashTwoOutlineIcon} onPress={clean}>Limpiar</Button>
-                            <Button style={tailwind('m-2 rounded-full items-center justify-center')} status='primary' accessoryRight={checkmarkCircleOutlineIcon}
-                                onPress={handleSubmit(onSubmit)}
-                            >Enviar</Button>
-                        </Layout>
-                        {/* Modal Para mostrar que tipo de Frecuencia Cardiaca ES: */}
-                        {infoNormal && <>
-                            <Text style={tailwind('my-1')} category='s1' appearance='hint'>{msj} </Text>
-                        </>
-
-                        }
+                <Layout style={tailwind('items-center justify-center flex-row px-3 py-3')}>
+                    <Button style={tailwind('m-4 rounded-full items-center justify-center')} status='warning' accessoryLeft={trashTwoOutlineIcon} onPress={clean}>Limpiar</Button>
+                    <Button style={tailwind('m-2 rounded-full items-center justify-center')} status='success' accessoryRight={checkmarkCircleOutlineIcon}
+                        onPress={handleSubmit(onSubmit)}
+                    >Diagnosto</Button>
+                </Layout>
+                {/* Modal Para mostrar que tipo de Frecuencia Cardiaca ES: */}
+                {infoNormal && <>
+                    <Card style={tailwind('my-1 rounded-full mt-12')}>
+                        <Text style={tailwind('my-1')} category='s1'>{msj} </Text>
                     </Card >
-                </Layout >
-            </Layout>
+                </>
+                }
+            </Card >
         </SafeAreaView>
     )
 }
