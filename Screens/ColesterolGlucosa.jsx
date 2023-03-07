@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
 import { Divider, Select, SelectItem, Layout, Text, Button, Input, Icon, Modal, Card, NativeDateService } from '@ui-kitten/components';
-import { useTailwind } from 'tailwind-rn';
+import tailwind from 'tailwind-rn';
 import { Controller, useForm } from "react-hook-form";
 import { SafeAreaView, ScrollView, StyleSheet, View, Keyboard } from 'react-native';
 
@@ -10,7 +10,7 @@ const ColesterolGlucosa = () => {
     const [msj, setMsj] = useState();
     const [number, setNumber] = useState();
 
-    const tailwind = useTailwind();
+    // const tailwind = useTailwind();
 
     const trashTwoOutlineIcon = (props) => <Icon {...props} name='trash-2-outline' />;
     const checkmarkCircleOutlineIcon = (props) => <Icon {...props} name='checkmark-circle-outline' />;
@@ -52,8 +52,8 @@ const ColesterolGlucosa = () => {
 
     }
     return (
-        <SafeAreaView style={tailwind('flex-1')}>
-            <Layout style={tailwind('flex-1 flex-col')}>
+        <SafeAreaView style={tailwind('h-full')}>
+            <ScrollView style={tailwind('h-full')}>
                 <Layout>
                     <Card style={styles.Card}>
 
@@ -141,10 +141,7 @@ const ColesterolGlucosa = () => {
                                 )} />
                         </Layout>
                         {getFormErrorMessage("Edad", "Edad es requerido")}
-
-
-
-
+                        
                         <Layout style={tailwind('items-center justify-center flex-row px-3 py-3')}>
                             <Button style={tailwind('m-2 rounded-full items-center justify-center')} status='primary' accessoryLeft={trashTwoOutlineIcon} onPress={clean}>Limpiar</Button>
                             <Button style={tailwind('m-2 rounded-full items-center justify-center')} status='primary' accessoryRight={checkmarkCircleOutlineIcon}
@@ -159,7 +156,7 @@ const ColesterolGlucosa = () => {
                         }
                     </Card >
                 </Layout >
-            </Layout>
+            </ScrollView>
         </SafeAreaView>
     )
 }

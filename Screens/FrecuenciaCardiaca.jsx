@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
 import { Divider, Select, SelectItem, Layout, Text, Button, Input, Icon, Modal, Card, NativeDateService } from '@ui-kitten/components';
-import { useTailwind } from 'tailwind-rn';
+import tailwind from 'tailwind-rn';
 import { Controller, useForm } from "react-hook-form";
 import { SafeAreaView, ScrollView, StyleSheet, View, Keyboard } from 'react-native';
 
@@ -12,7 +12,7 @@ const FrecuenciaCardiaca = () => {
     const [msj, setMsj] = useState();
     const [number, setNumber] = useState();
 
-    const tailwind = useTailwind();
+    // const tailwind = useTailwind();
 
     const trashTwoOutlineIcon = (props) => <Icon {...props} name='trash-2-outline' />;
     const checkmarkCircleOutlineIcon = (props) => <Icon {...props} name='checkmark-circle-outline' />;
