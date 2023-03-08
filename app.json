@@ -4,12 +4,12 @@
     "slug": "saludNative",
     "version": "1.0.0",
     "orientation": "portrait",
-    "icon": "./assets/icon.png",
+    "icon": "./assets/heart3.png",
     "userInterfaceStyle": "light",
     "splash": {
-      "image": "./assets/splash.png",
+      "image": "./assets/heart3.png",
       "resizeMode": "contain",
-      "backgroundColor": "#ffffff"
+      "backgroundColor": "#8CCBE0"
     },
     "assetBundlePatterns": [
       "**/*"
@@ -19,12 +19,18 @@
     },
     "android": {
       "adaptiveIcon": {
-        "foregroundImage": "./assets/adaptive-icon.png",
-        "backgroundColor": "#ffffff"
-      }
+        "foregroundImage": "./assets/heart3.png",
+        "backgroundColor": "#8CCBE0"
+      },
+      "package": "com.ivandx29.saludNative"
     },
     "web": {
-      "favicon": "./assets/favicon.png"
+      "favicon": "./assets/heart3.png"
+    },
+    "extra": {
+      "eas": {
+        "projectId": "15e55229-12bd-4cb8-8fd6-e6b5f63632cc"
+      }
     }
   }
 }

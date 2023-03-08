@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import { Divider, Select, SelectItem, Layout, Text, Button, Input, Icon, Modal, Card, NativeDateService } from '@ui-kitten/components';
+import { Layout, Text, Button, Input, Icon, Card, Avatar, ListItem } from '@ui-kitten/components';
 import tailwind from 'tailwind-rn';
 import { Controller, useForm } from "react-hook-form";
 import { SafeAreaView, ScrollView, StyleSheet, View, Keyboard } from 'react-native';
@@ -10,10 +10,16 @@ const ColesterolGlucosa = () => {
     const [msj, setMsj] = useState();
     const [number, setNumber] = useState();
 
-    // const tailwind = useTailwind();
-
     const trashTwoOutlineIcon = (props) => <Icon {...props} name='trash-2-outline' />;
     const checkmarkCircleOutlineIcon = (props) => <Icon {...props} name='checkmark-circle-outline' />;
+
+    const ItemImage = (props) => (
+        <Avatar
+            {...props}
+            style={styles.Avatar}
+            source={require('../assets/sangre.png')}
+        />
+    );
 
     // Función para mensaje de error en caso de faltar algún valor en un componente
     const getFormErrorMessage = (name, message) => {
@@ -142,12 +148,16 @@ const ColesterolGlucosa = () => {
                     <Button style={tailwind('m-2 rounded-full items-center justify-center')} status='warning' accessoryLeft={trashTwoOutlineIcon} onPress={clean}>Limpiar</Button>
                     <Button style={tailwind('m-2 rounded-full items-center justify-center')} status='success' accessoryRight={checkmarkCircleOutlineIcon}
                         onPress={handleSubmit(onSubmit)}
-                    >Diagnosto</Button>
+                    >Diagnostico</Button>
                 </Layout>
                 {/* Modal Para mostrar que tipo de Frecuencia Cardiaca ES: */}
                 {infoNormal && <>
                     <Card style={styles.Card}>
-                        <Text style={tailwind('my-1')} category='s1'>{msj} </Text>
+                        <ListItem
+                            title='Resultado'
+                            description={msj}
+                            accessoryLeft={ItemImage}
+                        />
                     </Card >
 
                 </>
@@ -211,5 +221,8 @@ const styles = StyleSheet.create({
         shadowRadius: 7.49,
         elevation: 12,
         borderRadius: 15
-    },
+    }, Avatar: {
+        width: 40,
+        height: 40,
+    }
 });
