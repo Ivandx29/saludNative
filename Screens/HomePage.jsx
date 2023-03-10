@@ -1,16 +1,13 @@
 import React, { useState, useEffect } from 'react';
-import { Layout, Text } from '@ui-kitten/components';
+import { Layout, Text, Modal, Button, Card } from '@ui-kitten/components';
 import { Icon, Tab, TabView } from '@ui-kitten/components'
-import { createMaterialTopTabNavigator } from '@react-navigation/material-top-tabs';
 import { StyleSheet } from 'react-native';
+import tailwind from 'tailwind-rn';
 
 
 //Screens
 import FrecuenciaCardiaca from './FrecuenciaCardiaca';
 import ColesterolGlucosa from './ColesterolGlucosa';
-import tailwind from 'tailwind-rn';
-
-const { Navigator, Screen } = createMaterialTopTabNavigator();
 
 const IconActivityOutline = (props) => (
     <Icon {...props} name='activity-outline' />
@@ -23,7 +20,7 @@ const IconDroplet = (props) => (
 );
 
 
-const TopTabBar = ({ navigation, state }) => {
+const TopTabBar = () => {
     const [selectedIndex, setSelectedIndex] = useState(0)
 
     return <>
@@ -41,8 +38,26 @@ const TopTabBar = ({ navigation, state }) => {
 }
 
 const HomeScreen = () => {
+    const [visible, setVisible] = useState(false);
+
+    useEffect(() => {
+        setVisible(true);
+    }, []);
+
     return (
-        <Layout style={{ flex: 1, marginTop: 40 }}>
+        <Layout style={{ flex: 1, marginTop: 45 }}>
+            <Modal
+                visible={visible}
+                backdropStyle={styles.Modal}>
+                <Card style={styles.CardTotalRecords} disabled={true}>
+                    <Text style={tailwind('text-justify')}>Esta aplicacion ayuda a dar un diagnostico, para saber si es usted puede
+                        tener algun problema de salud, como por ejemplo: presion alta, presion baja, colesterol alto, tipo de diabetes, etc.
+                    </Text>
+                    <Button style={tailwind('m-6 rounded-full ')} status='danger' onPress={() => setVisible(false)}>
+                        Cerrar
+                    </Button>
+                </Card>
+            </Modal>
             <TopTabBar />
         </Layout>
     )
@@ -55,5 +70,13 @@ const styles = StyleSheet.create({
         height: 64,
         alignItems: 'center',
         justifyContent: 'center',
+    },
+    CardTotalRecords: {
+        textAlign: 'justify',
+        marginRight: 35,
+        marginLeft: 35,
+    },
+    Modal: {
+        backgroundColor: 'rgba(0, 0, 0, 0.5)',
     },
 });

@@ -82,6 +82,7 @@ const FrecuenciaCardiaca = () => {
                         rules={{ required: true }}
                         render={({ field, fieldState }) => (
                             <Input
+                                placeholder='Ejemplo: 120'
                                 isFocused={true}
                                 status={fieldState.invalid ? 'danger' : 'basic'}
                                 maxLength={3}
@@ -104,6 +105,7 @@ const FrecuenciaCardiaca = () => {
                         rules={{ required: true }}
                         render={({ field, fieldState }) => (
                             <Input
+                                placeholder={"Ejemplo: 80"}
                                 isFocused={true}
                                 status={fieldState.invalid ? 'danger' : 'basic'}
                                 maxLength={3}
@@ -124,7 +126,7 @@ const FrecuenciaCardiaca = () => {
                         onPress={handleSubmit(onSubmit)}
                     >Diagnostico</Button>
                 </Layout>
-                {/* Modal Para mostrar que tipo de Frecuencia Cardiaca ES: */}
+                {/*Validacion para mostrar que tipo de Frecuencia Cardiaca es: */}
                 {infoNormal && <>
                     <Card style={tailwind('my-1 rounded-full mt-1')}>
                         <ListItem

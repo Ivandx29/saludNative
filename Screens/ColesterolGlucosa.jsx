@@ -2,7 +2,7 @@ import React, { useState } from 'react'
 import { Layout, Text, Button, Input, Icon, Card, Avatar, ListItem } from '@ui-kitten/components';
 import tailwind from 'tailwind-rn';
 import { Controller, useForm } from "react-hook-form";
-import { SafeAreaView, ScrollView, StyleSheet, View, Keyboard } from 'react-native';
+import { SafeAreaView, StyleSheet } from 'react-native';
 
 const ColesterolGlucosa = () => {
     // Modal -> Información
@@ -67,6 +67,7 @@ const ColesterolGlucosa = () => {
                         rules={{ required: true }}
                         render={({ field, fieldState }) => (
                             <Input
+                                placeholder='Ejemplo: 100'
                                 isFocused={true}
                                 status={fieldState.invalid ? 'danger' : 'basic'}
                                 maxLength={3}
@@ -88,6 +89,7 @@ const ColesterolGlucosa = () => {
                         rules={{ required: true }}
                         render={({ field, fieldState }) => (
                             <Input
+                                placeholder='Ejemplo: 70'
                                 isFocused={true}
                                 status={fieldState.invalid ? 'danger' : 'basic'}
                                 maxLength={3}
@@ -110,6 +112,7 @@ const ColesterolGlucosa = () => {
                         rules={{ required: true }}
                         render={({ field, fieldState }) => (
                             <Input
+                                placeholder='Ejemplo: 1.75'
                                 isFocused={true}
                                 status={fieldState.invalid ? 'danger' : 'basic'}
                                 maxLength={4}
@@ -130,6 +133,7 @@ const ColesterolGlucosa = () => {
                         rules={{ required: true }}
                         render={({ field, fieldState }) => (
                             <Input
+                                placeholder='Ejemplo: 20'
                                 isFocused={true}
                                 status={fieldState.invalid ? 'danger' : 'basic'}
                                 maxLength={2}
@@ -150,7 +154,7 @@ const ColesterolGlucosa = () => {
                         onPress={handleSubmit(onSubmit)}
                     >Diagnostico</Button>
                 </Layout>
-                {/* Modal Para mostrar que tipo de Frecuencia Cardiaca ES: */}
+                {/* Validacion Para mostrar que tipo de Diabetes es: */}
                 {infoNormal && <>
                     <Card style={styles.Card}>
                         <ListItem
